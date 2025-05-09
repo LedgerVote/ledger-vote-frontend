@@ -11,6 +11,8 @@ import NotFountPage from './pages/NotFountPage';
 import ActiveSessions from './pages/Dashboard/ActiveSessions';
 import Voting from './pages/Dashboard/Voting';
 import LiveResults from './pages/Dashboard/LiveResults';
+import Login from './pages/Login';
+import Register from './pages/Register';
 
 
 function App() {
@@ -22,6 +24,8 @@ function App() {
           <Route path="/" element={<Home />}/>
           <Route path="/faq" element={<Faq />}/>
           <Route path="/contactus" element={<ContactUs />}/>
+          <Route path="/login" element={<Login />}/>
+          <Route path="/register" element={<Register />}/>
           <Route path="/dashboard">
           <Route index  element={<Dashboard />}/>
           <Route path="createsession" element={<CreateSessions />}/>
