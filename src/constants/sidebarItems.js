@@ -1,47 +1,45 @@
 // Create an array of sidebar items with all required properties
 export const sidebarItems = [
-    {
-      name: "Dashboard",
-      icon: "M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z",
-      iconPath2: "M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z",
-      href: "/dashboard"
-    },
-    {
-      name: "Create Session",
-      icon: "M6.143 0H1.857A1.857 1.857 0 0 0 0 1.857v4.286C0 7.169.831 8 1.857 8h4.286A1.857 1.857 0 0 0 8 6.143V1.857A1.857 1.857 0 0 0 6.143 0Zm10 0h-4.286A1.857 1.857 0 0 0 10 1.857v4.286C10 7.169 10.831 8 11.857 8h4.286A1.857 1.857 0 0 0 18 6.143V1.857A1.857 1.857 0 0 0 16.143 0Zm-10 10H1.857A1.857 1.857 0 0 0 0 11.857v4.286C0 17.169.831 18 1.857 18h4.286A1.857 1.857 0 0 0 8 16.143v-4.286A1.857 1.857 0 0 0 6.143 10Zm10 0h-4.286A1.857 1.857 0 0 0 10 11.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 18 16.143v-4.286A1.857 1.857 0 0 0 16.143 10Z",
-      href: "/dashboard/createsession",
+  {
+    name: "Dashboard",
+    icon: "M3 5a1 1 0 0 1 1-1h12a1 1 0 1 1 0 2H4a1 1 0 0 1-1-1zm0 6a1 1 0 0 1 1-1h12a1 1 0 1 1 0 2H4a1 1 0 0 1-1-1zm0 6a1 1 0 0 1 1-1h12a1 1 0 1 1 0 2H4a1 1 0 0 1-1-1z",
+    href: "/dashboard",
+  },
+  {
+    name: "Create Session",
+    icon: "M8 2a1 1 0 0 0-1 1v2H5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h2v2a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-2h2a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1h-2V3a1 1 0 0 0-1-1H8zm0 2h8v8H8V4z",
+    href: "/dashboard/createsession",
     //   badge: {text: "Pro", color: "gray"}
-    },
-    {
-      name: "Handle Voters",
-      icon: "m17.418 3.623-.018-.008a6.713 6.713 0 0 0-2.4-.569V2h1a1 1 0 1 0 0-2h-2a1 1 0 0 0-1 1v2H9.89A6.977 6.977 0 0 1 12 8v5h-2V8A5 5 0 1 0 0 8v6a1 1 0 0 0 1 1h8v4a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-4h6a1 1 0 0 0 1-1V8a5 5 0 0 0-2.582-4.377ZM6 12H4a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2Z",
-      href: "/dashboard/handleVoters",
+  },
+  {
+    name: "Handle Voters",
+    icon: "M9 10a3 3 0 1 0 6 0v-1a3 3 0 1 0-6 0v1zm11 9v-1a7 7 0 0 0-14 0v1a2 2 0 0 0 4 0v-1a3 3 0 0 1 6 0v1a2 2 0 0 0 4 0zM8 2a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2H9a1 1 0 0 1-1-1z",
+    href: "/dashboard/handleVoters",
     //   notification: {count: "3", color: "blue"}
-    },
-    {
-        name: "Active Sessions",
-        icon: "m17.418 3.623-.018-.008a6.713 6.713 0 0 0-2.4-.569V2h1a1 1 0 1 0 0-2h-2a1 1 0 0 0-1 1v2H9.89A6.977 6.977 0 0 1 12 8v5h-2V8A5 5 0 1 0 0 8v6a1 1 0 0 0 1 1h8v4a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-4h6a1 1 0 0 0 1-1V8a5 5 0 0 0-2.582-4.377ZM6 12H4a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2Z",
-        href: "/dashboard/activeSessions",
-        // notification: {count: "3", color: "blue"}
-      },
-      {
-        name: "Voting",
-        icon: "m17.418 3.623-.018-.008a6.713 6.713 0 0 0-2.4-.569V2h1a1 1 0 1 0 0-2h-2a1 1 0 0 0-1 1v2H9.89A6.977 6.977 0 0 1 12 8v5h-2V8A5 5 0 1 0 0 8v6a1 1 0 0 0 1 1h8v4a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-4h6a1 1 0 0 0 1-1V8a5 5 0 0 0-2.582-4.377ZM6 12H4a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2Z",
-        href: "/dashboard/voting",
-        // notification: {count: "3", color: "blue"}
-      },
-      {
-        name: "Live Results",
-        icon: "m17.418 3.623-.018-.008a6.713 6.713 0 0 0-2.4-.569V2h1a1 1 0 1 0 0-2h-2a1 1 0 0 0-1 1v2H9.89A6.977 6.977 0 0 1 12 8v5h-2V8A5 5 0 1 0 0 8v6a1 1 0 0 0 1 1h8v4a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-4h6a1 1 0 0 0 1-1V8a5 5 0 0 0-2.582-4.377ZM6 12H4a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2Z",
-        href: "/dashboard/liveResults",
-        // notification: {count: "3", color: "blue"}
-      },
-      {
-        name: "Logout",
-        icon: "m17.418 3.623-.018-.008a6.713 6.713 0 0 0-2.4-.569V2h1a1 1 0 1 0 0-2h-2a1 1 0 0 0-1 1v2H9.89A6.977 6.977 0 0 1 12 8v5h-2V8A5 5 0 1 0 0 8v6a1 1 0 0 0 1 1h8v4a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-4h6a1 1 0 0 0 1-1V8a5 5 0 0 0-2.582-4.377ZM6 12H4a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2Z",
-        href: "#",
-        // notification: {count: "3", color: "blue"}
-      },
-    // Add remaining items similarly
-  ];
-  
+  },
+  {
+    name: "Active Sessions",
+    icon: "M6 2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H6zm1 2h6v4H7V4zm0 6h6v6H7v-6z",
+    href: "/dashboard/activeSessions",
+    // notification: {count: "3", color: "blue"}
+  },
+  {
+    name: "Voting",
+    icon: "M18 3H6a1 1 0 0 0-1 1v14a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3V4a1 1 0 0 0-1-1zm-1 14a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v12z",
+    href: "/dashboard/voting",
+    // notification: {count: "3", color: "blue"}
+  },
+  {
+    name: "Live Results",
+    icon: "M16 13h-3a1 1 0 1 1 0-2h3a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1zm-5 2H3a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1zm7-8H8a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1z",
+    href: "/dashboard/liveResults",
+    // notification: {count: "3", color: "blue"}
+  },
+  {
+    name: "Logout",
+    icon: "M12 2a1 1 0 0 1 1 1v2.586l2.293-2.293a1 1 0 0 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 1 1 1.414-1.414L11 5.586V3a1 1 0 0 1 1-1zm7 9a1 1 0 0 1-1 1H8a1 1 0 0 1 0-2h10a1 1 0 0 1 1 1zm-4 4a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-3a1 1 0 0 1-1-1v-6z",
+    href: "#",
+    // notification: {count: "3", color: "blue"}
+  },
+  // Add remaining items similarly
+];
