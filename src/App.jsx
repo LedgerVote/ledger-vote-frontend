@@ -6,13 +6,13 @@ import Faq from './pages/Faq';
 import ContactUs from './pages/ContactUs';
 import Dashboard from './pages/Dashboard';
 import CreateSessions from './pages/Dashboard/CreateSessions';
-import HandleVoters from './pages/Dashboard/handleVoters';
 import NotFountPage from './pages/NotFountPage';
 import ActiveSessions from './pages/Dashboard/ActiveSessions';
 import Voting from './pages/Dashboard/Voting';
 import LiveResults from './pages/Dashboard/LiveResults';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import HandleVoters from './pages/Dashboard/HandleVoters';
 
 
 function App() {
