@@ -42,57 +42,58 @@ function Home() {
         </div>
       </section>
       <section className="font-primary">
-  <h2 className="font-bold text-3xl text-center mt-20 mb-8">Who Can Use</h2>
-  <div className="bg-white flex flex-col md:flex-row md:justify-between items-center gap-8 lg:px-25 px-4 sm:px-8 py-8 md:py-12">
-    {/* Card 1 */}
-    <div className="rounded-lg w-full max-w-xs md:w-80 bg-gray-50 drop-shadow-xl flex flex-col items-center">
-      <div className="flex justify-center w-full pt-8">
-        <img
-          src={TeamWork}
-          alt="teamwork illustration"
-          className="w-24 md:w-32 max-w-xs"
-        />
-      </div>
-      <div className="bg-white w-full mt-8">
-        <h2 className="text-center font-bold text-lg md:text-xl py-4 md:py-6">
-          Organizations & Businesses
+        <h2 className="font-bold text-3xl text-center mt-20 mb-8">
+          Who Can Use
         </h2>
-      </div>
-    </div>
+        <div className="bg-white flex flex-col md:flex-row md:justify-between items-center gap-8 lg:px-25 px-4 sm:px-8 py-8 md:py-12">
+          {/* Card 1 */}
+          <div className="rounded-lg w-full max-w-xs md:w-80 bg-gray-50 drop-shadow-xl flex flex-col items-center">
+            <div className="flex justify-center w-full pt-8">
+              <img
+                src={TeamWork}
+                alt="teamwork illustration"
+                className="w-24 md:w-32 max-w-xs"
+              />
+            </div>
+            <div className="bg-white w-full mt-8">
+              <h2 className="text-center font-bold text-lg md:text-xl py-4 md:py-6">
+                Organizations & Businesses
+              </h2>
+            </div>
+          </div>
 
-    {/* Card 2 */}
-    <div className="rounded-lg w-full max-w-xs md:w-80 bg-gray-50 drop-shadow-xl flex flex-col items-center">
-      <div className="flex justify-center w-full pt-8">
-        <img
-          src={Bank}
-          alt="bank illustration"
-          className="w-24 md:w-32 max-w-xs"
-        />
-      </div>
-      <div className="bg-white w-full mt-8">
-        <h2 className="text-center font-bold text-lg md:text-xl py-4 md:py-6">
-          Banks & Financial Institutions
-        </h2>
-      </div>
-    </div>
-    {/* Card 3 */}
-    <div className="rounded-lg w-full max-w-xs md:w-80 bg-gray-50 drop-shadow-xl flex flex-col items-center">
-      <div className="flex justify-center w-full pt-8">
-        <img
-          src={Gov}
-          alt="government illustration"
-          className="w-24 md:w-32 max-w-xs"
-        />
-      </div>
-      <div className="bg-white w-full mt-8">
-        <h2 className="text-center font-bold text-lg md:text-xl py-4 md:py-6">
-          Government & Public Sector
-        </h2>
-      </div>
-    </div>
-  </div>
-</section>
-
+          {/* Card 2 */}
+          <div className="rounded-lg w-full max-w-xs md:w-80 bg-gray-50 drop-shadow-xl flex flex-col items-center">
+            <div className="flex justify-center w-full pt-8">
+              <img
+                src={Bank}
+                alt="bank illustration"
+                className="w-24 md:w-32 max-w-xs"
+              />
+            </div>
+            <div className="bg-white w-full mt-8">
+              <h2 className="text-center font-bold text-lg md:text-xl py-4 md:py-6">
+                Banks & Financial Institutions
+              </h2>
+            </div>
+          </div>
+          {/* Card 3 */}
+          <div className="rounded-lg w-full max-w-xs md:w-80 bg-gray-50 drop-shadow-xl flex flex-col items-center">
+            <div className="flex justify-center w-full pt-8">
+              <img
+                src={Gov}
+                alt="government illustration"
+                className="w-24 md:w-32 max-w-xs"
+              />
+            </div>
+            <div className="bg-white w-full mt-8">
+              <h2 className="text-center font-bold text-lg md:text-xl py-4 md:py-6">
+                Government & Public Sector
+              </h2>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <Footer />
     </div>
