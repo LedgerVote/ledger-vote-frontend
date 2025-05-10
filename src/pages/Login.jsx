@@ -9,19 +9,19 @@ function Login() {
 
       {/* Centered container instead of full-screen stretch */}
       <div className="bg-gray-100 py-20 px-4">
-        <div className="max-w-5xl mx-auto bg-white rounded-2xl shadow-2xl flex overflow-hidden">
+        <div className="max-w-5xl mx-auto bg-white rounded-2xl shadow-2xl flex flex-col md:flex-row overflow-hidden">
 
           {/* Left Illustration */}
-          <div className="w-1/2 flex items-center justify-center bg-white">
+          <div className="w-full md:w-1/2 flex items-center justify-center bg-white">
             <img
               src="src/assets/voting pic.png" // Replace with your actual image path
               alt="Voting Illustration"
-              className="max-w-[350px] h-auto"
+              className="max-w-[350px] w-full h-auto"
             />
           </div>
 
           {/* Right Login Form */}
-          <div className="w-1/2 flex items-center justify-center px-8 py-12">
+          <div className="w-full md:w-1/2 flex items-center justify-center px-8 py-12">
             <div className="w-full max-w-md bg-[#F6F4F4] rounded-xl shadow-2xl p-10">
 
               {/* Header */}
