@@ -1,11 +1,13 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import Hero from '../components/Hero'
 
-function Home() {
-  return (
+
+function Home() {  return (
     <div>
         <Navbar />
+        <Hero />
         <section className="bg-gray-50 py-10 px-4">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-10">
         
