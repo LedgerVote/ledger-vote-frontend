@@ -1,41 +1,104 @@
-
-import './App.css'
+import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from './pages/Home';
-import Faq from './pages/Faq';
-import ContactUs from './pages/ContactUs';
-import Dashboard from './pages/Dashboard';
-import CreateSessions from './pages/Dashboard/CreateSessions';
-import NotFountPage from './pages/NotFountPage';
-import ActiveSessions from './pages/Dashboard/ActiveSessions';
-import Voting from './pages/Dashboard/Voting';
-import LiveResults from './pages/Dashboard/LiveResults';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import HandleVoters from './pages/Dashboard/HandleVoters';
-
+import { Toaster } from "react-hot-toast";
+import { AuthProvider } from "./context/AuthContext";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Home from "./pages/Home";
+import Faq from "./pages/Faq";
+import ContactUs from "./pages/ContactUs";
+import Dashboard from "./pages/Dashboard";
+import CreateSessions from "./pages/Dashboard/CreateSessions";
+import NotFountPage from "./pages/NotFountPage";
+import ActiveSessions from "./pages/Dashboard/ActiveSessions";
+import Voting from "./pages/Dashboard/Voting";
+import LiveResults from "./pages/Dashboard/LiveResults";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import HandleVoters from "./pages/Dashboard/HandleVoters";
 
 function App() {
-
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />}/>
-          <Route path="/faq" element={<Faq />}/>
-          <Route path="/contactus" element={<ContactUs />}/>
-          <Route path="/login" element={<Login />}/>          <Route path="/register" element={<Register />}/>
-          <Route path="/dashboard" element={<Dashboard />}/>
-          <Route path="/dashboard/createsession" element={<CreateSessions />}/>
-          <Route path="/dashboard/handleVoters" element={<HandleVoters />}/>
-          <Route path="/dashboard/activeSessions" element={<ActiveSessions />}/>
-          <Route path="/dashboard/voting" element={<Voting />}/>
-          <Route path="/dashboard/liveResults" element={<LiveResults />}/>
-          <Route path="*" element={<NotFountPage />}/>
-        </Routes>
-      </BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/faq" element={<Faq />} />
+            <Route path="/contactus" element={<ContactUs />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route
+              path="/dashboard"
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/dashboard/createsession"
+              element={
+                <ProtectedRoute requiredUserType="admin">
+                  <CreateSessions />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/dashboard/handleVoters"
+              element={
+                <ProtectedRoute requiredUserType="admin">
+                  <HandleVoters />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/dashboard/activeSessions"
+              element={
+                <ProtectedRoute>
+                  <ActiveSessions />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/dashboard/voting"
+              element={
+                <ProtectedRoute requiredUserType="voter">
+                  <Voting />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/dashboard/liveResults"
+              element={
+                <ProtectedRoute>
+                  <LiveResults />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="*" element={<NotFountPage />} />
+          </Routes>
+
+          {/* Toast notifications */}
+          <Toaster
+            position="top-right"
+            toastOptions={{
+              duration: 4000,
+              style: {
+                background: "#363636",
+                color: "#fff",
+              },
+              success: {
+                duration: 3000,
+                theme: {
+                  primary: "#4aed88",
+                },
+              },
+            }}
+          />
+        </BrowserRouter>
+      </AuthProvider>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
