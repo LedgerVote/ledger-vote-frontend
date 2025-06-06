@@ -24,17 +24,13 @@ function App() {
           <Route path="/" element={<Home />}/>
           <Route path="/faq" element={<Faq />}/>
           <Route path="/contactus" element={<ContactUs />}/>
-          <Route path="/login" element={<Login />}/>
-          <Route path="/register" element={<Register />}/>
-          <Route path="/dashboard">
-          <Route index  element={<Dashboard />}/>
-          <Route path="createsession" element={<CreateSessions />}/>
-          <Route path="handleVoters" element={<HandleVoters />}/>
-          <Route path="activeSessions" element={<ActiveSessions />}/>
-          <Route path="voting" element={<Voting />}/>
-          <Route path="liveResults" element={<LiveResults />}/>
-          
-          </Route>
+          <Route path="/login" element={<Login />}/>          <Route path="/register" element={<Register />}/>
+          <Route path="/dashboard" element={<Dashboard />}/>
+          <Route path="/dashboard/createsession" element={<CreateSessions />}/>
+          <Route path="/dashboard/handleVoters" element={<HandleVoters />}/>
+          <Route path="/dashboard/activeSessions" element={<ActiveSessions />}/>
+          <Route path="/dashboard/voting" element={<Voting />}/>
+          <Route path="/dashboard/liveResults" element={<LiveResults />}/>
           <Route path="*" element={<NotFountPage />}/>
         </Routes>
       </BrowserRouter>
