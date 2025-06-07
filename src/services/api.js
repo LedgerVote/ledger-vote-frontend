@@ -77,23 +77,42 @@ export const sessionAPI = {
     const response = await api.post("/sessions", sessionData);
     return response.data;
   },
-
   // Get all sessions for admin
   getAdminSessions: async (params = {}) => {
     const response = await api.get("/sessions", { params });
     return response.data;
   },
 
+  // Get sessions for voter
+  getVoterSessions: async (params = {}) => {
+    const response = await api.get("/sessions/voter/sessions", { params });
+    return response.data;
+  },
   // Get session details with voters
   getSessionDetails: async (sessionId) => {
     const response = await api.get(`/sessions/${sessionId}`);
     return response.data;
   },
 
-  // Get voters for a session (alias for getSessionDetails for HandleVoters compatibility)
-  getVoters: async (sessionId) => {
-    const response = await api.get(`/sessions/${sessionId}`);
+  // Get voters for a session with enhanced filtering and pagination
+  getSessionVoters: async (sessionId, params = {}) => {
+    const response = await api.get(`/sessions/${sessionId}/voters`, { params });
     return response.data;
+  },
+
+  // Get voters for a session (alias for getSessionDetails for HandleVoters compatibility)
+  getVoters: async (sessionId, params = {}) => {
+    if (params && Object.keys(params).length > 0) {
+      // Use new enhanced endpoint if parameters are provided
+      const response = await api.get(`/sessions/${sessionId}/voters`, {
+        params,
+      });
+      return response.data;
+    } else {
+      // Fallback to original endpoint for compatibility
+      const response = await api.get(`/sessions/${sessionId}`);
+      return response.data;
+    }
   },
 
   // Get session (alias for getSessionDetails)
@@ -156,7 +175,6 @@ export const sessionAPI = {
     });
     return response.data;
   },
-
   // Approve all voters in a session
   approveAllVoters: async (sessionId) => {
     // Get all voters for the session first
@@ -166,6 +184,64 @@ export const sessionAPI = {
     const response = await api.post("/sessions/voters/approve", {
       voterIds,
       action: "approve",
+    });
+    return response.data;
+  },
+
+  // Enhanced bulk voter actions
+  bulkVoterActions: async (action, voterIds, sessionId = null) => {
+    const response = await api.post("/sessions/voters/bulk", {
+      action,
+      voterIds,
+      sessionId,
+    });
+    return response.data;
+  },
+
+  // Export voters to CSV
+  exportVoters: async (sessionId = null, format = "csv") => {
+    const params = { format };
+    if (sessionId) params.sessionId = sessionId;
+
+    const response = await api.get("/sessions/voters/export", {
+      params,
+      responseType: format === "csv" ? "blob" : "json",
+    });
+    return response;
+  },
+
+  // Get voter audit log
+  getVoterAuditLog: async (voterId, params = {}) => {
+    const response = await api.get(`/sessions/voters/${voterId}/audit`, {
+      params,
+    });
+    return response.data;
+  },
+
+  // Remove voters from session
+  removeVotersFromSession: async (sessionId, voterIds) => {
+    const response = await api.post("/sessions/voters/bulk", {
+      action: "remove",
+      voterIds,
+      sessionId,
+    });
+    return response.data;
+  },
+
+  // Reject voters
+  rejectVoters: async (voterIds) => {
+    const response = await api.post("/sessions/voters/bulk", {
+      action: "reject",
+      voterIds,
+    });
+    return response.data;
+  },
+
+  // Activate/Deactivate voters
+  toggleVotersActiveStatus: async (voterIds, activate = true) => {
+    const response = await api.post("/sessions/voters/bulk", {
+      action: activate ? "activate" : "deactivate",
+      voterIds,
     });
     return response.data;
   },
