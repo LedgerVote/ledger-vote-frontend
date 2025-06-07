@@ -7,7 +7,7 @@ import Home from "./pages/Home";
 import Faq from "./pages/Faq";
 import ContactUs from "./pages/ContactUs";
 import Dashboard from "./pages/Dashboard";
-import CreateSessions from "./pages/Dashboard/CreateSessions";
+
 import NotFountPage from "./pages/NotFountPage";
 import ActiveSessions from "./pages/Dashboard/ActiveSessions";
 import Voting from "./pages/Dashboard/Voting";
@@ -15,6 +15,8 @@ import LiveResults from "./pages/Dashboard/LiveResults";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import HandleVoters from "./pages/Dashboard/HandleVoters";
+// import CreateSessions from "./pages/Dashboard/CreateSessions";
+import CreateSession from "./pages/Dashboard/CreateSession";
 
 function App() {
   return (
@@ -34,12 +36,13 @@ function App() {
                   <Dashboard />
                 </ProtectedRoute>
               }
-            />
+            />{" "}
             <Route
               path="/dashboard/createsession"
               element={
                 <ProtectedRoute requiredUserType="admin">
-                  <CreateSessions />
+                  <CreateSession />
+                  
                 </ProtectedRoute>
               }
             />
