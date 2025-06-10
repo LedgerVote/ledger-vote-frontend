@@ -41,6 +41,45 @@ api.interceptors.response.use(
   }
 );
 
+// Create separate axios instance for voter authentication
+const voterApi = axios.create({
+  baseURL: API_BASE_URL,
+  timeout: 10000,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
+// Request interceptor for voter API to add voter token
+voterApi.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem("voterToken");
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+// Response interceptor for voter API to handle errors
+voterApi.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    if (error.response?.status === 401) {
+      // Token expired or invalid for voter
+      localStorage.removeItem("voterToken");
+      localStorage.removeItem("voterUser");
+      window.location.href = "/voter/login";
+    }
+    return Promise.reject(error);
+  }
+);
+
 // Auth API functions
 export const authAPI = {
   login: async (credentials) => {
@@ -64,6 +103,52 @@ export const authAPI = {
   },
 };
 
+// Voter Auth API functions
+export const voterAuthAPI = {
+  // Verify registration token
+  verifyRegistrationToken: async (token) => {
+    const response = await api.get(`/auth/voter/verify-token/${token}`);
+    return response.data;
+  },
+
+  // Complete voter registration
+  completeRegistration: async (registrationData) => {
+    const response = await api.post(
+      "/auth/voter/complete-registration",
+      registrationData
+    );
+    return response.data;
+  },
+
+  // Voter login with email/password
+  login: async (credentials) => {
+    const response = await api.post("/auth/voter/login", credentials);
+    return response.data;
+  },
+
+  // Voter login with wallet
+  walletLogin: async (walletData) => {
+    const response = await api.post("/auth/voter/wallet-login", walletData);
+    return response.data;
+  },
+  // Get voter profile
+  getProfile: async () => {
+    const response = await voterApi.get("/auth/voter/profile");
+    return response.data;
+  },
+
+  // Update voter profile
+  updateProfile: async (profileData) => {
+    const response = await voterApi.put("/auth/voter/profile", profileData);
+    return response.data;
+  },
+  // Voter logout
+  logout: async () => {
+    const response = await voterApi.post("/auth/voter/logout");
+    return response.data;
+  },
+};
+
 // Health check
 export const healthCheck = async () => {
   const response = await api.get("/health");
@@ -82,10 +167,9 @@ export const sessionAPI = {
     const response = await api.get("/sessions", { params });
     return response.data;
   },
-
   // Get sessions for voter
   getVoterSessions: async (params = {}) => {
-    const response = await api.get("/sessions/voter/sessions", { params });
+    const response = await voterApi.get("/sessions/voter/sessions", { params });
     return response.data;
   },
   // Get session details with voters

@@ -109,7 +109,7 @@ function CreateSession() {
       const sessionData = {
         title: formData.title.trim(),
         description: formData.description.trim(),
-        endDate: endDateTime.toISOString(),
+        endDate: endDateTime.toISOString().slice(0, 19).replace('T', ' '),
       };
 
       const response = await sessionAPI.createSession(sessionData);
