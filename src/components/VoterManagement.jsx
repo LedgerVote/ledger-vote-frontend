@@ -17,7 +17,8 @@ const VoterManagement = () => {
   const [sessions, setSessions] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({
-    voterId: "",
+    name: "",
+    email: "",
     sessionId: "",
   });
   const [message, setMessage] = useState({ type: "", text: "" });
@@ -72,16 +73,19 @@ const VoterManagement = () => {
     setLoading(true);
 
     try {
-      const voterData = {
-        voterId: formData.voterId,
-        hasVoted: false,
-        session: { id: parseInt(formData.sessionId) },
+      const createVoterRequest = {
+        name: formData.name,
+        email: formData.email,
+        sessionId: parseInt(formData.sessionId),
       };
 
-      await voterAPI.createVoter(voterData);
-      setMessage({ type: "success", text: "Voter registered successfully!" });
+      await voterAPI.createVoter(createVoterRequest);
+      setMessage({
+        type: "success",
+        text: "Voter registered successfully! An email with voter ID has been sent.",
+      });
       setShowModal(false);
-      setFormData({ voterId: "", sessionId: "" });
+      setFormData({ name: "", email: "", sessionId: "" });
 
       if (selectedSession) {
         fetchVotersBySession();
@@ -89,7 +93,19 @@ const VoterManagement = () => {
         fetchVoters();
       }
     } catch (error) {
-      setMessage({ type: "danger", text: "Failed to register voter" });
+      console.error("Registration error:", error);
+      const errorMessage =
+        error.response?.data?.message ||
+        error.response?.data ||
+        error.message ||
+        "Failed to register voter";
+      setMessage({
+        type: "danger",
+        text:
+          typeof errorMessage === "string"
+            ? errorMessage
+            : "Failed to register voter",
+      });
     } finally {
       setLoading(false);
     }
@@ -105,6 +121,29 @@ const VoterManagement = () => {
   const getSessionTitle = (sessionId) => {
     const session = sessions.find((s) => s.id === sessionId);
     return session ? session.title : "Unknown Session";
+  };
+
+  const handleResendEmail = async (voterId) => {
+    try {
+      setMessage({
+        type: "info",
+        text: "Sending voter ID email... This may take a few moments.",
+      });
+
+      await voterAPI.resendVoterEmail(voterId);
+      setMessage({
+        type: "success",
+        text: "Voter ID email resent successfully!",
+      });
+    } catch (error) {
+      console.error("Resend email error:", error);
+      setMessage({
+        type: "danger",
+        text:
+          "Failed to resend email: " +
+          (error.response?.data?.message || error.message),
+      });
+    }
   };
 
   return (
@@ -157,9 +196,12 @@ const VoterManagement = () => {
                   <thead>
                     <tr>
                       <th>ID</th>
+                      <th>Name</th>
+                      <th>Email</th>
                       <th>Voter ID</th>
                       <th>Session</th>
                       <th>Voting Status</th>
+                      <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -167,7 +209,15 @@ const VoterManagement = () => {
                       <tr key={voter.id}>
                         <td>{voter.id}</td>
                         <td>
-                          <strong>{voter.voterId}</strong>
+                          <strong>{voter.name || "N/A"}</strong>
+                        </td>
+                        <td>
+                          <small className="text-muted">
+                            {voter.email || "N/A"}
+                          </small>
+                        </td>
+                        <td>
+                          <code>{voter.voterId}</code>
                         </td>
                         <td>
                           {voter.session
@@ -188,6 +238,18 @@ const VoterManagement = () => {
                               </>
                             )}
                           </Badge>
+                        </td>
+                        <td>
+                          {voter.email && (
+                            <Button
+                              variant="outline-primary"
+                              size="sm"
+                              onClick={() => handleResendEmail(voter.voterId)}
+                              title="Resend voter ID email"
+                            >
+                              <i className="fas fa-envelope"></i>
+                            </Button>
+                          )}
                         </td>
                       </tr>
                     ))}
@@ -257,22 +319,37 @@ const VoterManagement = () => {
         <Modal.Body>
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3">
-              <Form.Label>Voter ID</Form.Label>
+              <Form.Label>Full Name *</Form.Label>
               <Form.Control
                 type="text"
-                name="voterId"
-                placeholder="Enter unique voter ID"
-                value={formData.voterId}
+                name="name"
+                placeholder="Enter voter's full name"
+                value={formData.name}
                 onChange={handleInputChange}
                 required
               />
               <Form.Text className="text-muted">
-                This should be a unique identifier for the voter
+                This will be used in the email notification
               </Form.Text>
             </Form.Group>
 
             <Form.Group className="mb-3">
-              <Form.Label>Voting Session</Form.Label>
+              <Form.Label>Email Address *</Form.Label>
+              <Form.Control
+                type="email"
+                name="email"
+                placeholder="Enter voter's email address"
+                value={formData.email}
+                onChange={handleInputChange}
+                required
+              />
+              <Form.Text className="text-muted">
+                Voter ID will be sent to this email address
+              </Form.Text>
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Voting Session *</Form.Label>
               <Form.Select
                 name="sessionId"
                 value={formData.sessionId}

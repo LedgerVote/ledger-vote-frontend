@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import {
   Card,
   Form,
@@ -36,33 +36,39 @@ const Login = () => {
 
     try {
       console.log("🔐 Attempting login with:", formData.username);
-      
+
       const response = await authAPI.login({
         username: formData.username,
         password: formData.password,
       });
 
       console.log("✅ Login successful:", response.data);
-      
+
       const userData = response.data;
       login(userData);
 
       // Redirect based on role
       if (userData.role === "admin") {
         navigate("/admin");
-        setMessage({ type: "success", text: `Welcome ${userData.name}! Redirecting to Admin Panel...` });
+        setMessage({
+          type: "success",
+          text: `Welcome ${userData.name}! Redirecting to Admin Panel...`,
+        });
       } else {
         navigate("/user");
-        setMessage({ type: "success", text: `Welcome ${userData.name}! Redirecting to Voter Dashboard...` });
+        setMessage({
+          type: "success",
+          text: `Welcome ${userData.name}! Redirecting to Voter Dashboard...`,
+        });
       }
-
     } catch (error) {
       console.error("❌ Login failed:", error);
-      
-      const errorMessage = error.response?.data?.message || 
-                          error.message || 
-                          "Login failed. Please check your credentials.";
-      
+
+      const errorMessage =
+        error.response?.data?.message ||
+        error.message ||
+        "Login failed. Please check your credentials.";
+
       setMessage({ type: "danger", text: errorMessage });
     } finally {
       setLoading(false);
@@ -133,6 +139,18 @@ const Login = () => {
                   )}
                 </Button>
               </Form>
+
+              <hr className="my-4" />
+
+              <div className="text-center">
+                <p className="mb-0">
+                  Don't have an account?{" "}
+                  <Link to="/register" className="text-decoration-none">
+                    <i className="fas fa-user-plus me-1"></i>
+                    Create Account
+                  </Link>
+                </p>
+              </div>
 
               <div className="mt-4 p-3 bg-light rounded">
                 <h6 className="text-muted mb-2">
